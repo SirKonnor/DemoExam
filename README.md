@@ -1,6 +1,8 @@
 #DemoExam
 
-Бом - https://bom.firpo.ru/Public/87 Зил - https://zealdocs.org/ Структура:
+Бом - https://bom.firpo.ru/Public/87 Зил - https://zealdocs.org/ 
+
+Структура:
 
 1. Проверка phpmyadmin
 
