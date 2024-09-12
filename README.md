@@ -51,3 +51,15 @@ Controller:
 Передает данные в представление.
 
 Файлы Xampp хранятся в htdocs
+
+![copp](https://github.com/user-attachments/assets/68efaa77-6882-4242-90e3-31117f85c833)
+
+![Диаграмма1](https://github.com/user-attachments/assets/41d364c1-d35d-469e-ba91-f3581da45ab5)
+
+![Login1](https://github.com/user-attachments/assets/40a3c05c-5dbc-4d69-b167-2cf76d3a8402)
+
+![Диаграмма2](https://github.com/user-attachments/assets/fc165a3f-6cb3-4c15-b16d-7ab44d4e9225)
+
+
+
+
