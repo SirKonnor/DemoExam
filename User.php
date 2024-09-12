@@ -8,17 +8,11 @@ use Yii;
  * This is the model class for table "user".
  *
  * @property int $id
- * @property int $role_id
+ * @property string $fio
+ * @property string $phone
  * @property string $username
  * @property string $password
- * @property string $email
- * @property string $first_name
- * @property string $last_name
- * @property string $middle_name
- * @property string $phone
- *
- * @property Request[] $requests
- * @property Role $role
+ * @property int $type_id
  */
 class User extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface
 {
@@ -36,12 +30,9 @@ class User extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface
     public function rules()
     {
         return [
-            [['role_id', 'username', 'password', 'email', 'first_name', 'last_name', 'middle_name', 'phone'], 'required'],
-            [['role_id'], 'integer'],
-            [['username', 'password', 'email', 'first_name', 'last_name', 'middle_name', 'phone'], 'string', 'max' => 255],
-            [['username'], 'unique'],
-            [['email'], 'unique'],
-            [['role_id'], 'exist', 'skipOnError' => true, 'targetClass' => Role::class, 'targetAttribute' => ['role_id' => 'id']],
+            [['fio', 'phone', 'username', 'password', 'type_id'], 'required'],
+            [['type_id'], 'integer'],
+            [['fio', 'phone', 'username', 'password'], 'string', 'max' => 255],
         ];
     }
 
@@ -52,44 +43,16 @@ class User extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface
     {
         return [
             'id' => 'ID',
-            'role_id' => 'Role ID',
+            'fio' => 'Fio',
+            'phone' => 'Phone',
             'username' => 'Username',
             'password' => 'Password',
-            'email' => 'Email',
-            'first_name' => 'First Name',
-            'last_name' => 'Last Name',
-            'middle_name' => 'Middle Name',
-            'phone' => 'Phone',
+            'type_id' => 'Type ID',
         ];
     }
-
-    /**
-     * Gets query for [[Requests]].
-     *
-     * @return \yii\db\ActiveQuery
-     */
-    public function getRequests()
-    {
-        return $this->hasMany(Request::class, ['user_id' => 'id']);
-    }
-
-    /**
-     * Gets query for [[Role]].
-     *
-     * @return \yii\db\ActiveQuery
-     */
-    public function getRole()
-    {
-        return $this->hasOne(Role::class, ['id' => 'role_id']);
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-
     public static function findIdentity($id)
     {
-        return static::findOne($id);
+        return static::findOne($id);;
     }
 
     /**
@@ -135,7 +98,7 @@ class User extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface
         return false;
     }
 
-    /**
+    /**model
      * Validates password
      *
      * @param string $password password to validate
@@ -143,6 +106,6 @@ class User extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface
      */
     public function validatePassword($password)
     {
-        return $this->password === md5($password);
+        return $this->password === $password;
     }
 }

@@ -7,15 +7,16 @@ use Yii;
 /**
  * This is the model class for table "request".
  *
- * @property int $id
- * @property int $user_id
- * @property string $auto_number
- * @property int $text
- * @property string $created_at
- * @property int $status_id
- *
- * @property Status $status
- * @property User $user
+ * @property int $id_request
+ * @property string $StartDate
+ * @property int $orgTechType_id
+ * @property string $orgTechModel
+ * @property string $ProblemDescryption
+ * @property int $RequestStatus_id
+ * @property string $CompletionDate
+ * @property string $RepairParts
+ * @property int $master_id
+ * @property int $client_id
  */
 class Request extends \yii\db\ActiveRecord
 {
@@ -33,12 +34,11 @@ class Request extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['user_id', 'auto_number', 'text', 'created_at', 'status_id'], 'required'],
-            [['user_id', 'text', 'status_id'], 'integer'],
-            [['created_at'], 'safe'],
-            [['auto_number'], 'string', 'max' => 255],
-            [['auto_number'], 'unique'],
-            [['user_id'], 'exist', 'skipOnError' => true, 'targetClass' => User::class, 'targetAttribute' => ['user_id' => 'id']],
+            [['StartDate', 'orgTechType_id', 'orgTechModel', 'ProblemDescryption', 'RequestStatus_id', 'CompletionDate', 'RepairParts', 'master_id', 'client_id'], 'required'],
+            [['StartDate', 'CompletionDate'], 'safe'],
+            [['orgTechType_id', 'RequestStatus_id', 'master_id', 'client_id'], 'integer'],
+            [['orgTechModel', 'ProblemDescryption', 'RepairParts'], 'string', 'max' => 255],
+            [['client_id'], 'unique'],
         ];
     }
 
@@ -48,32 +48,16 @@ class Request extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'id' => 'ID',
-            'user_id' => 'User ID',
-            'auto_number' => 'Auto Number',
-            'text' => 'Text',
-            'created_at' => 'Created At',
-            'status_id' => 'Status ID',
+            'id_request' => 'Id Request',
+            'StartDate' => 'Start Date',
+            'orgTechType_id' => 'Org Tech Type ID',
+            'orgTechModel' => 'Org Tech Model',
+            'ProblemDescryption' => 'Problem Descryption',
+            'RequestStatus_id' => 'Request Status ID',
+            'CompletionDate' => 'Completion Date',
+            'RepairParts' => 'Repair Parts',
+            'master_id' => 'Master ID',
+            'client_id' => 'Client ID',
         ];
-    }
-
-    /**
-     * Gets query for [[Status]].
-     *
-     * @return \yii\db\ActiveQuery
-     */
-    public function getStatus()
-    {
-        return $this->hasOne(Status::class, ['id' => 'status_id']);
-    }
-
-    /**
-     * Gets query for [[User]].
-     *
-     * @return \yii\db\ActiveQuery
-     */
-    public function getUser()
-    {
-        return $this->hasOne(User::class, ['id' => 'user_id']);
     }
 }
