@@ -61,5 +61,5 @@ Controller:
 ![Диаграмма2](https://github.com/user-attachments/assets/fc165a3f-6cb3-4c15-b16d-7ab44d4e9225)
 
 
-
+OrgTech - https://drive.google.com/drive/folders/1FD8qxNe_EMz-oxjM4C-SyqMwTi30Vc0v
 
